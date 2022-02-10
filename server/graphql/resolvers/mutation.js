@@ -1,12 +1,18 @@
 const { User } = require('../../models/user');
-const { UserInputError, AuthenticationError, ApolloError } = require('apollo-server-express')
+const {AuthenticationError } = require('apollo-server-express')
 
 module.exports = {
     Mutation:{
-        hello: async(parent,args,context,info)=>{
+        addUser: async(parent,args,context,info)=>{
             try{
-                /// CHECK THE MAIL
-
+                const user = new User({
+                    email: args.userInput.email,
+                    password: args.userInput.password
+                });
+                const result = await user.save();
+                return {
+                    ...result._doc
+                }
             } catch(err){
                 throw err
             }
