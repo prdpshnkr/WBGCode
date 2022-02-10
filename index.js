@@ -2,6 +2,11 @@
 const express = require('express');
 const app = express();
 
+// Cors
+
+const cors = require('cors');
+app.use(cors());
+
 // Graphql 
 const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./server/graphql/schema');
